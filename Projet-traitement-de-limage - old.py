@@ -34,9 +34,9 @@ from PIL import Image as img
 
 from PIL import ImageTk
 
-import tkinter as TK
+import Tkinter as TK
 
-import tkinter.filedialog,tkinter.messagebox,tkinter.simpledialog
+import tkFileDialog,tkMessageBox,tkSimpleDialog
 
 import numpy as np
 
@@ -60,9 +60,9 @@ def demandechemin():
 
     global chemin
 
-    filename=tkinter.filedialog.askopenfilename(title="Chemin d'accès",filetypes=[('gif','.gif'),('jpg','.jpg'),('tout','.*')])    
+    filename=tkFileDialog.askopenfilename(title="Chemin d'accès",filetypes=[('gif','.gif'),('jpg','.jpg'),('tout','.*')])    
 
-    print(filename)
+    print filename
 
     chemin=filename
 
@@ -186,13 +186,13 @@ def nouveau():
 
     global zd_f,chemin,limage,sauv,n
 
-    if tkinter.messagebox.askokcancel("Fichier","Nouveau projet ?"):
+    if tkMessageBox.askokcancel("Fichier","Nouveau projet ?"):
 
         fermer()
 
-        zd_h=tkinter.simpledialog.askinteger("Nouveau projet", "Largeur ?") 
+        zd_h=tkSimpleDialog.askinteger("Nouveau projet", "Largeur ?") 
 
-        zd_l=tkinter.simpledialog.askinteger("Nouveau projet", "Longueur ?") 
+        zd_l=tkSimpleDialog.askinteger("Nouveau projet", "Longueur ?") 
 
         zd_f=TK.Canvas(fen,height=abs(zd_h),width=abs(zd_l),bg="white",bd=0, highlightthickness=0)
 
@@ -236,7 +236,7 @@ def enregistrer():#liste de valeur image
 
     uneimage=converlimg(limage)
 
-    chemin=tkinter.filedialog.asksaveasfilename(title="Chemin d'accès",filetypes=[('gif','.gif'),('jpg','.jpg'),('tout','.*')]) 
+    chemin=tkFileDialog.asksaveasfilename(title="Chemin d'accès",filetypes=[('gif','.gif'),('jpg','.jpg'),('tout','.*')]) 
 
     try:
 
@@ -266,7 +266,7 @@ def quitter():
 
     message="Voulez vous quitter ?"
 
-    if tkinter.messagebox.askokcancel("Quitter",message):
+    if tkMessageBox.askokcancel("Quitter",message):
 
         exit()    
 
@@ -616,7 +616,7 @@ def seuillage():
 
     global limage
 
-    coupage=tkinter.simpledialog.askinteger("Sensibilité: 0 à 255", "Valeur conseillée 3 à 15: ")
+    coupage=tkSimpleDialog.askinteger("Sensibilité: 0 à 255", "Valeur conseillée 3 à 15: ")
 
     lbrute=coup(abs(coupage),limage)
 
@@ -638,7 +638,7 @@ def contour():
 
     lbrute=limage
 
-    coupage=tkinter.simpledialog.askinteger("Sensibilité: 0 à 255", "Valeur recommandée 3: ")
+    coupage=tkSimpleDialog.askinteger("Sensibilité: 0 à 255", "Valeur recommandée 3: ")
 
     lbrute=coup(abs(coupage),limage)
 
@@ -650,7 +650,7 @@ def contour():
 
         for j in range(1,len(l)-1):
 
-            if (l[j]!=l[j-1] and l[j]!=l[j+1]) or (lbrute[i-1][j]!=lbrute[i][j] and lbrute[i+1][j]!=lbrute[i][j]):
+            if (l[j]<>l[j-1] and l[j]<>l[j+1]) or (lbrute[i-1][j]<>lbrute[i][j] and lbrute[i+1][j]<>lbrute[i][j]):
 
                 l[j]=255
 
@@ -722,11 +722,11 @@ def couleur():
 
     global coul
 
-    coul=tkinter.simpledialog.askinteger("Niveau de gris 0 à 255", "Valeur couleur:")
+    coul=tkSimpleDialog.askinteger("Niveau de gris 0 à 255", "Valeur couleur:")
 
     while coul<0 or coul>255:    
 
-        coul=tkinter.simpledialog.askinteger("Erreur valeur couleur", "entre 0 et 255:")
+        coul=tkSimpleDialog.askinteger("Erreur valeur couleur", "entre 0 et 255:")
 
     coulap()
 
